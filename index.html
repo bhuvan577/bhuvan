@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Library Management UI – Frontend Only</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <button class="hamburger" id="hamburger">☰</button>
+    <div class="brand-title">📚 Library Management</div>
+    <div class="device-switch" id="deviceSwitch">
+      <button data-size="desktop" class="active" title="Desktop">🖥</button>
+      <button data-size="tablet"  title="Tablet">📗</button>
+      <button data-size="mobile"  title="Mobile">📱</button>
+    </div>
+    <div class="top-links">
+      <a href="#">Subscription</a>
+      <a href="#">Edit this application</a>
+      <a href="#">Help</a>
+    </div>
+    <div class="user-chip">
+      <span class="bell" title="Notifications">🔔</span>
+      <span>Chris</span>
+      <div class="user-avatar">C</div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">Library Management</div>
+    <div class="nav-group">
+      <div class="nav-item" data-view="search">🔎 Search Books</div>
+      <div class="nav-collapsible open">📚 Resources</div>
+      <div class="submenu open">
+        <div class="nav-item" data-view="add">➕ Add Resource</div>
+        <div class="nav-item" data-view="all">🗂 All Resources</div>
+      </div>
+      <div class="nav-item" data-view="borrow">🛒 Borrow Request</div>
+      <div class="nav-item">👥 Library Readers</div>
+      <div class="nav-item">🧾 Members</div>
+      <div class="nav-item">⚙️ Admin</div>
+      <div class="nav-item">🧑 User</div>
+      <div class="nav-item">🧰 Settings</div>
+    </div>
+    <div class="sidebar-footer">Frontend demo only</div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Header Controls -->
+    <div class="view-header">
+      <h2 id="viewTitle">Add Resource</h2>
+      <div class="segmented" id="modeSwitch">
+        <button class="active" data-mode="add">Add</button>
+        <button data-mode="list">List</button>
+      </div>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search title / author / category…">
+      </div>
+      <button class="primary-btn" id="openBorrowDirect" title="Borrow selected resource" disabled>Borrow</button>
+    </div>
+
+    <!-- Panels -->
+    <div class="panels">
+      <!-- Left Panel (Add / List) -->
+      <div class="panel" id="panelPrimary">
+
+        <!-- Add Resource Form -->
+        <div id="addResourceView" class="form-section">
+          <h3>Add Resource</h3>
+          <p class="info-txt">Enter bibliographic details then press <strong>Submit</strong>. This is purely front-end (no database).</p>
+          <form id="addForm">
+            <div class="form-grid">
+              <div class="form-field">
+                <label>ISBN / Barcode *</label>
+                <input required name="isbn" placeholder="DL2109">
+              </div>
+              <div class="form-field">
+                <label>Resource Type *</label>
+                <select name="type" required>
+                  <option value="Book" selected>Book</option>
+                  <option>Magazine</option>
+                  <option>CD</option>
+                  <option>Journal</option>
+                </select>
+                <small>( Example : Book, Magazine, CD )</small>
+              </div>
+              <div class="form-field">
+                <label>Title *</label>
+                <input required name="title" value="The Merchant of Venice">
+              </div>
+              <div class="form-field">
+                <label>Edition</label>
+                <input name="edition" value="6">
+              </div>
+              <div class="form-field">
+                <label>Author *</label>
+                <input required name="author" value="William Shakespeare">
+              </div>
+              <div class="form-field">
+                <label>Category *</label>
+                <input required name="category" value="Action and Adventure">
+              </div>
+              <div class="form-field">
+                <label>Publisher *</label>
+                <input required name="publisher" value="William Blackwood and Sons">
+              </div>
+              <div class="form-field">
+                <label>Language *</label>
+                <select name="language" required>
+                  <option>English</option>
+                  <option>Spanish</option>
+                  <option>Chinese</option>
+                  <option>French</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label>Quantity *</label>
+                <input type="number" required name="quantity" value="10" min="1">
+              </div>
+              <div class="form-field">
+                <label>Cover (URL)</label>
+                <input name="cover" placeholder="https://example.com/cover.jpg">
+              </div>
+              <div class="form-field" style="grid-column:1 / -1;">
+                <label>Notes</label>
+                <textarea name="notes" rows="3" placeholder="Optional internal notes"></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn primary">Submit</button>
+              <button type="reset" class="btn">Reset</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Resource List -->
+        <div id="allResourcesView" class="resource-list hidden">
+          <!-- Cards injected by JS -->
+        </div>
+      </div>
+
+      <!-- Right Panel (Details) -->
+      <div class="panel" id="panelDetails">
+        <div id="detailsView" class="details">
+          <div class="placeholder">
+            <h3 style="margin-top:0;">Select a resource</h3>
+            <p>The details of a resource will appear here. Choose an item from the list or add a new one.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Mobile Bottom Tabs -->
+<div class="bottom-tabs" id="bottomTabs" style="display:none;">
+  <button data-tab="add" class="active">➕<span>Add</span></button>
+  <button data-tab="list">📚<span>List</span></button>
+  <button data-tab="borrow" id="bottomBorrow" disabled>🛒<span>Borrow</span></button>
+</div>
+
+<!-- Borrow Modal (Dynamic) -->
+<div id="modalRoot"></div>
+</body>
+</html>
