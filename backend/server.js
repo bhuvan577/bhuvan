@@ -1,20 +1,34 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config();
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
+const notFound = require("./middleware/notFound");
+const errorHandler = require("./middleware/errorHandler");
 
-const bookRoutes = require("./routes/bookRoutes");
+dotenv.config();
+connectDB(); // connects to MongoDB
 
 const app = express();
-app.use(cors());
+
+// CORS
+const corsOrigin = process.env.CORS_ORIGIN || "*";
+app.use(cors({ origin: corsOrigin.split(",").map((s) => s.trim()) }));
+
+// Body parser
 app.use(express.json());
 
-app.use("/api/books", bookRoutes);
+// Health check
+app.get("/", (req, res) => {
+  res.send("Library API running");
+});
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("MongoDB connected");
-    app.listen(5000, () => console.log("Server running on port 5000"));
-  })
-  .catch((err) => console.error(err));
+// Routes
+app.use("/api/books", require("./routes/bookRoutes"));
+
+// 404 + error handlers
+app.use(notFound);
+app.use(errorHandler);
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

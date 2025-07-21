@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "year": 1997,
+    "genre": "Fantasy"
+  },
+  {
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert T. Kiyosaki",
+    "year": 1997,
+    "genre": "Finance"
+  },
+  {
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "year": 1988,
+    "genre": "Fiction"
+  },
+  {
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "year": 2008,
+    "genre": "Programming"
+  },
+  {
+    "title": "Wings of Fire",
+    "author": "A. P. J. Abdul Kalam",
+    "year": 1999,
+    "genre": "Autobiography"
+  }
+]
