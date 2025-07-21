@@ -1,0 +1,1 @@
+MONGO_URI=mongodb+srv://<your-user>:<your-password>@cluster0.mongodb.net/library
